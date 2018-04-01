@@ -1,0 +1,70 @@
+<div class="ui-g">
+    <div class="ui-g-12 animated fadeIn">
+        <div class="home-header">
+            <img class="home-header-image" src="assets/images/homeheader.png">
+        </div>
+    </div>
+</div>
+<div class="profile header ui-g">
+    <div class="ui-g-12 ui-md-8 ui-lg-9 ">
+        <p-autoComplete [(ngModel)]="searchRequest.search" [suggestions]="searchSuggestions"
+                        (completeMethod)="getSuggestions($event)"
+                        placeholder="Find Email Templates here"
+                        [disabled]="isBusy"
+                        [minLength]="1" [style]="{'width':'100%'}"
+                        [inputStyle]="{'width':'100%'}"
+                        class="p-autocomplete"></p-autoComplete>
+    </div>
+    <div class="ui-g-12 ui-md-4 ui-lg-3">
+        <button pButton type="button" (click)="onSearchClicked()" icon="fa-search-plus" label="Search Now"
+                class="ui-g-12 ui-button-warning" item-width="100%"></button>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12 ">
+        <div *ngIf="!isBusy" class="error-message-container animated bounce rubberBand">
+            <label *ngIf="!searchResponse.recordCount && !hasErrors">Opps.. hotel not found. Please try again.</label>
+            <label *ngIf="hasErrors" class="error-message">Opps.. something went wrong. Please try again.</label>
+        </div>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12 ">
+        <div *ngIf="!hasErrors" class="center animated fadeIn">
+            <app-busy-indicator [isBusy]="isBusy" title="Searching.."></app-busy-indicator>
+        </div>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div *ngIf="!hasErrors && !initialLoad" class="animated fadeIn">
+            <p-table [columns]="cols" [value]="searchResponse.emailtemplates" [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [rowHover]="true"
+                     [paginator]="canShowPager" [rows]="searchResponse.rowsPerPage" [totalRecords]="searchResponse.recordCount" selectionMode="single"
+                     alwaysShowPaginator="false">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            <div *ngIf="col.field == 'dateUpdated'">
+                                {{rowData[col.field] | date:'medium'}}
+                            </div>
+                            <div *ngIf="col.field != 'dateUpdated'">
+                                {{rowData[col.field]}}
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    {{searchResponse.recordCount | number : 0}} record(s) found.
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

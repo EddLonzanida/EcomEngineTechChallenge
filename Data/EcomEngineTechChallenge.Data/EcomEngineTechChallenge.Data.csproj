@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="Repositories\DataRepositorySoftDeleteInt.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\EcomEngineTechChallenge.Contracts\EcomEngineTechChallenge.Contracts.csproj" />
+    <ProjectReference Include="..\..\Business\EcomEngineTechChallenge.Business.Common\EcomEngineTechChallenge.Business.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eml.DataRepository" Version="2.0.0.162" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+
+					<ItemGroup>
+						<None Update="Migrations\XmlSources\bets.json">
+							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+						</None>
+						<None Update="Migrations\XmlSources\customers.json">
+							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+						</None>
+						<None Update="Migrations\SampleDataSources\Data.json">
+						  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+						</None>
+						<None Update="Migrations\XmlSources\races.json">
+							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+						</None>
+					</ItemGroup>
+					
+</Project>

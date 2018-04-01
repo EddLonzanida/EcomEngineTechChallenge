@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "sourceRoot": "src",
+    "mapRoot": "wwwroot",
+
+    "baseUrl": "ClientApp",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "ClientApp/assets",
+    "src/assets",
+    "static",
+    "dist",
+    "karma.conf.js",
+    "protractor.conf.js"
+  ]
+}

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <None Include="..\..\Data\EcomEngineTechChallenge.Data\Migrations\SampleDataSources\Data.json" Link="SampleDataSources\Data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\EcomEngineTechChallenge.Contracts\EcomEngineTechChallenge.Contracts.csproj" />
+    <ProjectReference Include="..\..\Business\EcomEngineTechChallenge.Business.Common\EcomEngineTechChallenge.Business.Common.csproj" />
+    <ProjectReference Include="..\..\Data\EcomEngineTechChallenge.Data\EcomEngineTechChallenge.Data.csproj" />
+    <ProjectReference Include="..\..\Hosts\EcomEngineTechChallenge.ApiHost\EcomEngineTechChallenge.ApiHost.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="Shouldly" Version="3.0.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.console" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SampleDataSources\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+					
+</Project>
