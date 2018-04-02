@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { EcomengineService } from "./ecomengine.service";
 import { EmailtemplateSearchRequest } from "./requests/emailtemplate-search-request";
 import { EmailtemplateSearchResponse } from "./responses/emailtemplate-search-response";
@@ -18,7 +18,7 @@ export class EcomengineComponent implements OnInit {
     // search responses
     searchResponse = new EmailtemplateSearchResponse();
     // busyIndicator
-    isBusy = false;
+    isBusy = true;
     canShowPager = false;
     hasErrors = false;
     initialLoad = true;
@@ -29,7 +29,7 @@ export class EcomengineComponent implements OnInit {
         { field: "dateUpdated", header: "Date Updated" }
     ];
 
-    constructor(private readonly ecomengineService: EcomengineService) {
+    constructor(private readonly ecomengineService: EcomengineService, private readonly cd: ChangeDetectorRef) {
         this.searchSuggestions = [];
         this.initialLoad = true;
     }
@@ -38,31 +38,36 @@ export class EcomengineComponent implements OnInit {
         this.search();
     }
 
-    search(): void {
+    search() {
         this.isBusy = true;
         this.hasErrors = false;
-        this.ecomengineService.search(this.searchRequest)
+        return this.ecomengineService.search(this.searchRequest)
             .then(r => {
-                this.isBusy = false;
                 this.searchResponse = r;
                 this.canShowPager = this.searchResponse.recordCount > this.searchResponse.rowsPerPage;
 
-                if (!this.canShowPager) {
-                    this.searchRequest.page = 1;
-                }
+                if (!this.canShowPager) this.searchRequest.page = 1;
+
+                const initial_load = this.initialLoad;
                 this.initialLoad = false;
+                this.isBusy = false;
+
+                if (initial_load) this.cd.detectChanges(); //prevent ExpressionChangedAfterItHasBeenCheckedError
             })
             .catch(e => {
-                this.isBusy = false;
                 this.hasErrors = true;
+                this.isBusy = false;
+                this.cd.detectChanges();
             });
     }
 
     getSuggestions(event): void {
         const query = event.query;
-        this.ecomengineService.getSuggestions(query).then(suggestions => {
-            this.searchSuggestions = suggestions;
-        })
+
+        this.ecomengineService.getSuggestions(query)
+            .then(suggestions => {
+                this.searchSuggestions = suggestions;
+            })
             .catch(e => {
                 console.error(e);
             });
@@ -75,9 +80,7 @@ export class EcomengineComponent implements OnInit {
     }
 
     onLazyLoad(event) {
-        if (this.initialLoad) {
-            return;
-        }
+        if (this.initialLoad) return;
 
         if (event && event.first > 0 && event.rows > 0) {
             this.searchRequest.page = (event.first / event.rows) + 1;

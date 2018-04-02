@@ -5,18 +5,12 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
-
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from 'primeng/shared';
-
-
-
 import { BusyIndicatorComponent } from './shared/busy-indicator/busy-indicator.component';
 import { EcomengineService } from './ecomengine/ecomengine.service';
 import { EcomengineComponent } from './ecomengine/ecomengine.component';
@@ -39,7 +33,6 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         MenuModule,
         ButtonModule,
-        DropdownModule,
         AutoCompleteModule,
         TableModule,
         HttpModule,
