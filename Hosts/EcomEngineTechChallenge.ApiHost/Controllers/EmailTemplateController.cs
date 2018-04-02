@@ -1,67 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using EcomEngineTechChallenge.ApiHost.BaseClasses;
-using EcomEngineTechChallenge.Business.Common.Dto;
 using EcomEngineTechChallenge.Business.Common.Entities;
 using EcomEngineTechChallenge.Contracts;
+using Eml.ControllerBase;
 using Eml.DataRepository.Contracts;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EcomEngineTechChallenge.ApiHost.Controllers
 {
     [Export]
-    public class EmailTemplateController : ApiControllerBase
+    public class EmailTemplateController : CrudControllerBaseGuid<EmailTemplate, IDataRepositoryGuid<EmailTemplate>>
     {
-        protected readonly IDataRepositoryGuid<EmailTemplate> repository;
-
         [ImportingConstructor]
         public EmailTemplateController(IDataRepositoryGuid<EmailTemplate> repository)
+        : base(repository)
         {
-            this.repository = repository;
         }
 
-        [Route("")]
-        [HttpGet]
-        public virtual async Task<IActionResult> Get(string search = "", int? page = 1, bool? desc = false, int? field = 0)
-        {
-            var response = await GetAll(search, page, desc, field);
-
-            return Ok(response);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            var result = await repository.GetAsync(r => r.Id.Equals(id), r => r.OrderBy(x => x.SearchableName), 1);
-            var item = result.FirstOrDefault();
-
-            if (item == null) return NotFound();
-
-            return Ok(item);
-        }
-
-        [Route("Suggestions")]
-        [HttpGet]
-        public async Task<IActionResult> Suggestions(string search = "")
-        {
-            var suggestions = await GetSuggestions(search);
-
-            return Ok(suggestions);
-        }
-
-        protected override void RegisterIDisposable(List<IDisposable> disposables)
-        {
-            disposables.Add(repository);
-        }
-
-        #region HELPER_METHODS
-        private async Task<EmailtemplateSearchResponse> GetAll(string search = "", int? page = 1, bool? desc = false, int? sortColumn = 0)
+        protected override async Task<SearchResponse<EmailTemplate>> GetAll(string search = "", int? page = 1, bool? desc = false, int? sortColumn = 0, Guid? parentId = null)
         {
             search = search.ToLower();
             Expression<Func<EmailTemplate, bool>> whereClause = r => search == "" || r.SearchableName.ToLower().Contains(search);
@@ -69,17 +27,7 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
             var orderBy = GetOrderBy((eSortColumn)sortColumn.Value, desc.Value);
             var items = await repository.GetPagedListAsync(page.Value, whereClause, orderBy);
 
-            return new EmailtemplateSearchResponse(items.ToList(), items.TotalItemCount, repository.PageSize);
-        }
-
-        private async Task<List<string>> GetSuggestions(string search = "")
-        {
-            search = search.ToLower();
-
-            return await repository
-                .GetAutoCompleteIntellisenseAsync(r => search == "" || r.SearchableName.ToLower().Contains(search),
-                    r => r.OrderBy(s => s.SearchableName),
-                    r => r.SearchableName);
+            return new SearchResponse<EmailTemplate>(items, items.TotalItemCount, repository.PageSize);
         }
 
         private static Func<IQueryable<EmailTemplate>, IQueryable<EmailTemplate>> GetOrderBy(eSortColumn sortColumn, bool isdesc)
@@ -124,6 +72,5 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
 
             return orderBy;
         }
-        #endregion // HELPER_METHODS
     }
 }

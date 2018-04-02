@@ -7,6 +7,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Dto\SearchResponse.cs" />
     <Compile Remove="Entities\Bet.cs" />
     <Compile Remove="Entities\Customer.cs" />
     <Compile Remove="Entities\Horse.cs" />

@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { EcomengineService } from "./ecomengine.service";
 import { EmailtemplateSearchRequest } from "./requests/emailtemplate-search-request";
-import { EmailtemplateSearchResponse } from "./responses/emailtemplate-search-response";
+import { IEmailTemplate } from "./dto/iemail-template";
+import { SearchResponse } from "../shared/responses/search-response";
 
 @Component({
     selector: "at-ecomengine",
@@ -16,7 +17,7 @@ export class EcomengineComponent implements OnInit {
     // search parameters
     searchRequest = new EmailtemplateSearchRequest();
     // search responses
-    searchResponse = new EmailtemplateSearchResponse();
+    searchResponse = new SearchResponse<IEmailTemplate>();
     // busyIndicator
     isBusy = true;
     canShowPager = false;

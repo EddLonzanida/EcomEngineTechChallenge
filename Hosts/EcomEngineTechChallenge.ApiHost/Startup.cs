@@ -16,7 +16,6 @@ using Eml.Mef;
 using Eml.MefDependencyResolver.Api;
 using Eml.ClassFactory.Contracts;
 using EcomEngineTechChallenge.ApiHost.Helpers;
-using Microsoft.AspNetCore.Rewrite;
 using Newtonsoft.Json;
 
 namespace EcomEngineTechChallenge.ApiHost

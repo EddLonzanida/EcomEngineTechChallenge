@@ -10,6 +10,7 @@
         <p-autoComplete [(ngModel)]="searchRequest.search" [suggestions]="searchSuggestions"
                         (completeMethod)="getSuggestions($event)"
                         placeholder="Find Email Templates here"
+                        [disabled] ="isBusy"
                         [minLength]="1" [style]="{'width':'100%'}"
                         [inputStyle]="{'width':'100%'}"
                         class="p-autocomplete"></p-autoComplete>
@@ -37,9 +38,9 @@
 <div class="ui-g">
     <div class="ui-g-12">
         <div *ngIf="!hasErrors && !initialLoad" class="animated fadeIn">
-            <p-table [columns]="cols" [value]="searchResponse.emailtemplates" [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [rowHover]="true"
-                     [paginator]="canShowPager" [rows]="searchResponse.rowsPerPage" [totalRecords]="searchResponse.recordCount" selectionMode="single"
-                     alwaysShowPaginator="false">
+            <p-table [columns]="cols" [value]="searchResponse.items" [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [rowHover]="true"
+                     [paginator]="canShowPager" [rows]="searchResponse.rowsPerPage" [totalRecords]="searchResponse.recordCount"
+                     selectionMode="single" alwaysShowPaginator="false">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
                         <th *ngFor="let col of columns" [pSortableColumn]="col.field">

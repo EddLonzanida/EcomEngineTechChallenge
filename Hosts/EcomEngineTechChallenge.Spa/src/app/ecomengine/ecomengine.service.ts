@@ -3,7 +3,8 @@ import { Http } from "@angular/http";
 import { HttpClient } from "@angular/common/http";
 import "rxjs/add/operator/toPromise";
 import { EmailtemplateSearchRequest } from "./requests/emailtemplate-search-request";
-import { EmailtemplateSearchResponse } from "./responses/emailtemplate-search-response";
+import { IEmailTemplate } from "./dto/iemail-template";
+import { SearchResponse } from "../shared/responses/search-response";
 
 @Injectable()
 export class EcomengineService {
@@ -31,7 +32,7 @@ export class EcomengineService {
         return this.http.get(`${this.baseUrl}emailtemplate`, config)
             .toPromise()
             .then(res => {
-                return <EmailtemplateSearchResponse>res.json();
+                return res.json() as SearchResponse<IEmailTemplate>;
             })
             .then(data => { return data; });
     }
