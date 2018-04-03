@@ -11,6 +11,8 @@ import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { SharedModule } from 'primeng/shared';
+
+import { SearchService } from './shared/services/search.service';
 import { BusyIndicatorComponent } from './shared/busy-indicator/busy-indicator.component';
 import { EcomengineService } from './ecomengine/ecomengine.service';
 import { EcomengineComponent } from './ecomengine/ecomengine.component';
@@ -39,7 +41,7 @@ const appRoutes: Routes = [
         HttpClientModule,
         SharedModule
     ],
-    providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl }, EcomengineService],
+    providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl }, SearchService, EcomengineService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

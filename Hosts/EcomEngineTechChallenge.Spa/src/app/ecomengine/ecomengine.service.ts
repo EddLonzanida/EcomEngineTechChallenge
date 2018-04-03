@@ -1,40 +1,27 @@
-import { Injectable, Inject } from "@angular/core";
-import { Http } from "@angular/http";
-import { HttpClient } from "@angular/common/http";
-import "rxjs/add/operator/toPromise";
+import { Injectable } from "@angular/core";
 import { EmailtemplateSearchRequest } from "./requests/emailtemplate-search-request";
 import { IEmailTemplate } from "./dto/iemail-template";
 import { SearchResponse } from "../shared/responses/search-response";
+import { SearchService } from "../shared/services/search.service";
 
 @Injectable()
 export class EcomengineService {
-    private readonly baseUrl: string;
-    constructor(private readonly http: Http, private readonly httpClient: HttpClient, @Inject("BASE_URL") baseUrl: string) {
-        this.baseUrl = baseUrl;
+
+    constructor(private readonly searchService: SearchService)
+    {
     }
 
     getSuggestions(query: string) {
-        const action = "suggestions";
-        const url = `${this.baseUrl}emailtemplate/${action}?search=${query}`;
+        const controller = "emailtemplate";
 
-        return this.http.get(url)
-            .toPromise()
-            .then(res => {
-                return <string[]>res.json();
-            })
-            .then(data => { return data; });
+        return this.searchService.getSuggestions(controller, query);
     }
 
     search(request: EmailtemplateSearchRequest) {
         const cleanedRequest = this.cleanParameters(request);
-        const config = { params: cleanedRequest }
+        const controller = "emailtemplate";
 
-        return this.http.get(`${this.baseUrl}emailtemplate`, config)
-            .toPromise()
-            .then(res => {
-                return res.json() as SearchResponse<IEmailTemplate>;
-            })
-            .then(data => { return data; });
+        return this.searchService.search<EmailtemplateSearchRequest, IEmailTemplate>(controller, cleanedRequest);
     }
 
     private cleanParameters(request: EmailtemplateSearchRequest): EmailtemplateSearchRequest {

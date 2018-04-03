@@ -30,9 +30,8 @@ export class EcomengineComponent implements OnInit {
         { field: "dateUpdated", header: "Date Updated" }
     ];
 
-    constructor(private readonly ecomengineService: EcomengineService, private readonly cd: ChangeDetectorRef) {
-        this.searchSuggestions = [];
-        this.initialLoad = true;
+    constructor(private readonly ecomengineService: EcomengineService, private readonly cd: ChangeDetectorRef)
+    {
     }
 
     ngOnInit() {
@@ -56,6 +55,7 @@ export class EcomengineComponent implements OnInit {
                 if (initial_load) this.cd.detectChanges(); //prevent ExpressionChangedAfterItHasBeenCheckedError
             })
             .catch(e => {
+                this.initialLoad = true;
                 this.hasErrors = true;
                 this.isBusy = false;
                 this.cd.detectChanges();
@@ -76,7 +76,6 @@ export class EcomengineComponent implements OnInit {
 
     onSearchClicked() {
         this.searchRequest.page = 1;
-        this.initialLoad = false;
         this.search();
     }
 

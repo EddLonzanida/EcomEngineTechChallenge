@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\app\shared\services\search.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="src\app\ecomengine\dto\" />
     <Folder Include="src\app\ecomengine\requests\" />
     <Folder Include="wwwroot\" />
@@ -14,6 +18,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\shared\services\search.service.ts" />
   </ItemGroup>
 
 </Project>
