@@ -26,24 +26,6 @@ namespace EcomEngineTechChallenge.Tests.Unit.Controllers
         }
 
         [Fact]
-        public async Task Controller_ShouldGetEmailTemplate()
-        {
-            repository.GetAsync(Arg.Any<Expression<Func<EmailTemplate, bool>>>(),
-                    Arg.Any<Func<IQueryable<EmailTemplate>,
-                        IQueryable<EmailTemplate>>>(), Arg.Any<int?>())
-                .Returns(emailTemplatesStub);
-
-            var response = await controller.Get(Guid.Parse("ae99d53d-04d6-4962-ad26-44aec94ea690")) as OkObjectResult;;
-
-            await repository.Received()
-                .GetAsync(Arg.Any<Expression<Func<EmailTemplate, bool>>>(),
-                    Arg.Any<Func<IQueryable<EmailTemplate>,
-                        IQueryable<EmailTemplate>>>(), Arg.Any<int?>());
-            var result = response?.Value as IEnumerable<EmailTemplate>;
-            result?.ToList().Count.ShouldBe(74);
-        }
-
-        [Fact]
         public async Task Controller_ShouldGetEmailTemplates()
         {
             var pagedList = new PagedList<EmailTemplate>(emailTemplatesStub, 1, 10);

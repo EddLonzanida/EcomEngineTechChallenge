@@ -11,15 +11,15 @@ using Eml.DataRepository.Contracts;
 namespace EcomEngineTechChallenge.ApiHost.Controllers
 {
     [Export]
-    public class EmailTemplateController : CrudControllerBaseGuid<EmailTemplate, IDataRepositoryGuid<EmailTemplate>>
+    public class EmailTemplateController : CrudControllerBase<Guid, EmailTemplate>
     {
         [ImportingConstructor]
         public EmailTemplateController(IDataRepositoryGuid<EmailTemplate> repository)
-        : base(repository)
+            : base(repository)
         {
         }
 
-        protected override async Task<SearchResponse<EmailTemplate>> GetAll(string search = "", int? page = 1, bool? desc = false, int? sortColumn = 0, Guid? parentId = null)
+        protected override async Task<SearchResponse<EmailTemplate>> GetAll(string search = "", int? page = 1, bool? desc = false, int? sortColumn = 0)
         {
             search = search.ToLower();
             Expression<Func<EmailTemplate, bool>> whereClause = r => search == "" || r.SearchableName.ToLower().Contains(search);
