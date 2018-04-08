@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using EcomEngineTechChallenge.Business.Common.Dto;
 using EcomEngineTechChallenge.Business.Common.Entities;
-using EcomEngineTechChallenge.Data.Migrations.Utils;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
+using Eml.DataRepository;
 
-namespace EcomEngineTechChallenge.Data.Migrations.Data
+namespace EcomEngineTechChallenge.Data.Migrations.Seeders
 {
-    public static class EmailTemplateData
+    public static class EmailTemplateSeeder
     {
         public static void Seed(EcomEngineTechChallengeDb context, string relativePath)
         {
-            SeedData.Execute("EmailTemplates", () =>
+            Seeder.Execute("EmailTemplates", () =>
             {
                 var intialData = GetEmailTemplatesFromJson(relativePath);
 

@@ -13,23 +13,25 @@ export class SearchService {
 
     getSuggestions(controller: string, query: string) {
         const action = "suggestions";
-        const url = `${this.baseUrl}${controller}/${action}?search=${query}`;
+        const route = `${controller}/${action}`;
+        const param = {search: query};
 
-        return this.http.get(url)
-            .toPromise()
-            .then(res => {
-                return <string[]>res.json();
-            })
-            .then(data => { return data; });
+        return this.request<string[]>(route, param);
     }
 
-    search<TRequest, TResponse>(controller: string, request: TRequest) {
+    search<TRequest, TResponse>(route: string, request: TRequest) {
         const config = { params: request }
 
-        return this.http.get(`${this.baseUrl}${controller}`, config)
+        return this.request<SearchResponse<TResponse>>(route, config);
+    }
+
+    request<TResponse>(route: string, params?: any) {
+        const config = { params: params }
+
+        return this.http.get(`${this.baseUrl}${route}`, config)
             .toPromise()
             .then(res => {
-                return res.json() as SearchResponse<TResponse>;
+                return res.json() as TResponse;
             })
             .then(data => { return data; });
     }

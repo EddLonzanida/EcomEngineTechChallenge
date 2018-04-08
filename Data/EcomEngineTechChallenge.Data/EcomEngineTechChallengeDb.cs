@@ -7,12 +7,11 @@ using Eml.DataRepository.Contracts;
 
 namespace EcomEngineTechChallenge.Data
 {
-    public class EcomEngineTechChallengeDb : DbContext, IAllowIdentityInsertWhenSeeding
+    public class EcomEngineTechChallengeDb : DbContext
     {
-        public bool AllowIdentityInsertWhenSeeding { get; set; }
 
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = ConfigBuilder.GetConfiguration();
@@ -21,9 +20,11 @@ namespace EcomEngineTechChallenge.Data
             optionsBuilder.UseSqlServer(mainDbConnectionString.Value);
         }
 
+        private bool allowIdentityInsertWhenSeeding { get; set; } = true;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (AllowIdentityInsertWhenSeeding)
+            if (allowIdentityInsertWhenSeeding)
             {
                 foreach (var pb in modelBuilder.Model
                     .GetEntityTypes()

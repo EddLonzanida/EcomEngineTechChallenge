@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EcomEngineTechChallenge.Business.Common.Entities;
-using EcomEngineTechChallenge.Data.Migrations.Data;
+using EcomEngineTechChallenge.Data.Migrations.Seeders;
 using Eml.Contracts.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace EcomEngineTechChallenge.Tests.Unit.BaseClasses
 
         protected ControllerTestBase()
         {
-            emailTemplatesStub = EmailTemplateData.GetEmailTemplatesFromJson(SAMPLE_DATA_SOURCES);
+            emailTemplatesStub = EmailTemplateSeeder.GetEmailTemplatesFromJson(SAMPLE_DATA_SOURCES);
         }
 
         public void Dispose()
