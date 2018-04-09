@@ -22,7 +22,7 @@ namespace EcomEngineTechChallenge.Data.Migrations.Seeders
 
         public static List<EmailTemplate> GetEmailTemplatesFromJson(string relativePath)
         {
-            var intialData = Eml.DataRepository.Seed.GetJsonStub<Rootobject>("Data", relativePath);
+            var intialData = Seeder.GetJsonStub<Rootobject>("Data", relativePath);
             var items = new List<EmailTemplate>();
             var rnd = new Random();
             const int MAX = 150;
