@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eml.EntityBaseClasses" Version="1.0.0.16" />
+    <PackageReference Include="Eml.EntityBaseClasses" Version="1.0.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
   </ItemGroup>
 
