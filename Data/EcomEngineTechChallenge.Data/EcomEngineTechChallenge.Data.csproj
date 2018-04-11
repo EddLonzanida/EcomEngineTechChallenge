@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eml.DataRepository" Version="2.0.0.167" />
+    <PackageReference Include="Eml.DataRepository" Version="2.0.0.172" />
   </ItemGroup>
 
   <PropertyGroup>
