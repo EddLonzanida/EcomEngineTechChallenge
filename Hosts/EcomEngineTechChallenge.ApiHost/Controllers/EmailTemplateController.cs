@@ -7,6 +7,7 @@ using EcomEngineTechChallenge.Business.Common.Entities;
 using EcomEngineTechChallenge.Contracts;
 using Eml.ControllerBase;
 using Eml.DataRepository.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EcomEngineTechChallenge.ApiHost.Controllers
 {
@@ -19,13 +20,49 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
         {
         }
 
-        protected override async Task<SearchResponse<EmailTemplate>> GetAll(string search = "", int? page = 1, bool? desc = false, int? sortColumn = 0)
+        [HttpGet]
+        public override async Task<IActionResult> GetItems(string search = "", int? page = 1, bool? desc = false, int? field = 0)
+        {
+            return await DoGetItemsAsync(search, page.Value, desc.Value, field.Value);
+        }
+
+        [HttpGet("{id}")]
+        public override async Task<IActionResult> Get([FromRoute]Guid id)
+        {
+            return await DoGetAsync(id);
+        }
+
+        [HttpGet("Suggestions")]
+        public override async Task<IActionResult> Suggestions(string search = "")
+        {
+            return await DoGetSuggestionsAsync(search);
+        }
+
+        [HttpPut("{id}")]
+        public override async Task<IActionResult> Put([FromRoute]Guid id, [FromBody]EmailTemplate item)
+        {
+            return await DoPutAsync(id, item);
+        }
+
+        [HttpPost]
+        public override async Task<IActionResult> Post([FromBody]EmailTemplate item)
+        {
+            return await DoPostAsync(item);
+        }
+
+        [HttpDelete("{id}")]
+        public override async Task<IActionResult> Delete([FromRoute]Guid id, string reason = "")
+        {
+            return await DoDeleteAsync(id, reason);
+        }
+
+        protected override async Task<SearchResponse<EmailTemplate>> GetItemsAsync(string search, int page, bool desc, int sortColumn)
         {
             search = search.ToLower();
             Expression<Func<EmailTemplate, bool>> whereClause = r => search == "" || r.SearchableName.ToLower().Contains(search);
 
-            var orderBy = GetOrderBy((eSortColumn)sortColumn.Value, desc.Value);
-            var items = await repository.GetPagedListAsync(page.Value, whereClause, orderBy);
+            var orderBy = GetOrderBy((eSortColumn)sortColumn, desc);
+            var items = await repository.GetPagedListAsync(page, whereClause, orderBy);
 
             return new SearchResponse<EmailTemplate>(items, items.TotalItemCount, repository.PageSize);
         }

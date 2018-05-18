@@ -1,5 +1,5 @@
 using Eml.ClassFactory.Contracts;
-using Eml.Contracts.Extensions;
+using Eml.ClassFactory.Contracts.Extensions;
 using Xunit;
 
 namespace EcomEngineTechChallenge.Tests.Integration.BaseClasses

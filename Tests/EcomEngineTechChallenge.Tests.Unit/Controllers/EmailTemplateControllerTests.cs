@@ -34,7 +34,7 @@ namespace EcomEngineTechChallenge.Tests.Unit.Controllers
                     Arg.Any<Func<IQueryable<EmailTemplate>, IQueryable<EmailTemplate>>>())
                 .Returns(pagedList);
 
-            var response = await controller.Get() as OkObjectResult; ;
+            var response = await controller.GetItems() as OkObjectResult; ;
 
             await repository.Received()
                 .GetPagedListAsync(Arg.Any<int>(),

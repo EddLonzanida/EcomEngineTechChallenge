@@ -20,7 +20,6 @@ export class EcomengineService {
     search(request: EmailtemplateSearchRequest) {
         const cleanedRequest = this.cleanParameters(request);
         const controller = "emailtemplate";
-
         return this.searchService.search<EmailtemplateSearchRequest, IEmailTemplate>(controller, cleanedRequest);
     }
 

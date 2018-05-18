@@ -20,9 +20,7 @@ export class SearchService {
     }
 
     search<TRequest, TResponse>(route: string, request: TRequest) {
-        const config = { params: request }
-
-        return this.request<SearchResponse<TResponse>>(route, config);
+        return this.request<SearchResponse<TResponse>>(route, request);
     }
 
     request<TResponse>(route: string, params?: any) {

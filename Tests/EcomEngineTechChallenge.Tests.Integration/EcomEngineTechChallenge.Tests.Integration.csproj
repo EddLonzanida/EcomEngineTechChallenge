@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <None Include="..\..\Data\EcomEngineTechChallenge.Data\Migrations\SampleDataSources\Data.json" Link="Migrations\SampleDataSources\Data.json">
@@ -25,16 +25,14 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-					<ItemGroup>
-						<None Update="appsettings.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-					</ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\SampleDataSources\" />
+  </ItemGroup>
 
-
-					<ItemGroup>
-					  <Folder Include="Migrations\SampleDataSources\" />
-					</ItemGroup>
-					
 </Project>
