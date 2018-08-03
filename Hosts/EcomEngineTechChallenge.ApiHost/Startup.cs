@@ -24,6 +24,8 @@ namespace EcomEngineTechChallenge.ApiHost
     {
         private const string SWAGGER_DOC = "v1";
 
+        private const string VERSION = "v1";
+
         private const string API_NAME = "EcomEngineTechChallenge";
 
         private const string LAUNCH_URL = "docs";
@@ -54,7 +56,14 @@ namespace EcomEngineTechChallenge.ApiHost
                 });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc(SWAGGER_DOC, new Info { Title = API_NAME, Version = "v1" });
+                c.SwaggerDoc(SWAGGER_DOC, new Info
+                    {
+                        Title = API_NAME,
+                        Version = VERSION,
+                        Contact = new Contact { Name = "Eddie Lonzanida", Email = "EddieLonzanida@hotmail.com" },
+                        Description = "Solution using .Net Core 2.1 combined with Angular5. Featuring Etags, RateLimits, IoC/DI using MEF, Unit & IntegrationTest using LocalDb via EFCore, Production DataMigrations, SwaggerUI, DataRepository & Mediator pattern, NLog, and more.."
+                    }
+                );
                 c.OperationFilter<SwashbuckleSummaryOperationFilter>();
                 c.DocumentFilter<LowercaseDocumentFilter>();
             });
