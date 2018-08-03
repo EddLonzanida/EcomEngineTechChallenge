@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +17,9 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCoreRateLimit" Version="2.1.0" />
-    <PackageReference Include="Eml.ControllerBase" Version="2.1.0.12" />
+    <PackageReference Include="Eml.ControllerBase" Version="2.1.0.33" />
     <!--<PackageReference Include="Eml.ExplicitDispose.Api" Version="2.0.0.1" />-->
-    <PackageReference Include="Eml.MefDependencyResolver.Api" Version="2.1.0.2" />
+    <PackageReference Include="Eml.MefDependencyResolver.Api" Version="2.1.0.12" />
     <PackageReference Include="IdentityServer4" Version="2.2.0" />
     <PackageReference Include="Marvin.Cache.Headers" Version="1.2.0" />
     <!--<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />-->
@@ -37,16 +38,16 @@
   </ItemGroup>
 
 
-					<ItemGroup>
-						<Content Update="appsettings.Development.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</Content>
-						<Content Update="appsettings.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</Content>
-						<Content Update="NLog.config">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</Content>
-					</ItemGroup>
-					
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

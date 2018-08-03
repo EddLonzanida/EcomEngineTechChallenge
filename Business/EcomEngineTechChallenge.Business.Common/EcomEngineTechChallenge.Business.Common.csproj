@@ -1,4 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Helpers\**" />
@@ -19,12 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eml.EntityBaseClasses" Version="2.1.0.4" />
+    <PackageReference Include="Eml.EntityBaseClasses" Version="2.1.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
 
 </Project>

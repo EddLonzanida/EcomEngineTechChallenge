@@ -1,4 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Repositories\DataRepositorySoftDeleteInt.cs" />
@@ -10,27 +15,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eml.DataRepository" Version="2.1.0.4" />
+    <PackageReference Include="Eml.DataRepository" Version="2.1.0.55" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Update="Migrations\XmlSources\bets.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Migrations\XmlSources\customers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Migrations\SampleDataSources\Data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Migrations\XmlSources\races.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-
-					<ItemGroup>
-						<None Update="Migrations\XmlSources\bets.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-						<None Update="Migrations\XmlSources\customers.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-						<None Update="Migrations\SampleDataSources\Data.json">
-						  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-						<None Update="Migrations\XmlSources\races.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-					</ItemGroup>
-					
 </Project>

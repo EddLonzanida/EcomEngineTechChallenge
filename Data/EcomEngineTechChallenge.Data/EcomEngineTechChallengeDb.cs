@@ -3,13 +3,11 @@ using Eml.ConfigParser.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Eml.DataRepository;
 using EcomEngineTechChallenge.Business.Common.Entities;
-using Eml.DataRepository.Contracts;
 
 namespace EcomEngineTechChallenge.Data
 {
     public class EcomEngineTechChallengeDb : DbContext
     {
-
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -20,20 +18,15 @@ namespace EcomEngineTechChallenge.Data
             optionsBuilder.UseSqlServer(mainDbConnectionString.Value);
         }
 
-        private bool allowIdentityInsertWhenSeeding { get; set; } = true;
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (allowIdentityInsertWhenSeeding)
+            foreach (var pb in modelBuilder.Model
+                .GetEntityTypes()
+                .SelectMany(t => t.GetProperties())
+                .Where(p => p.Name.Equals("Id"))
+                .Select(p => modelBuilder.Entity(p.DeclaringEntityType.ClrType).Property(p.Name)))
             {
-                foreach (var pb in modelBuilder.Model
-                    .GetEntityTypes()
-                    .SelectMany(t => t.GetProperties())
-                    .Where(p => p.Name.Equals("Id"))
-                    .Select(p => modelBuilder.Entity(p.DeclaringEntityType.ClrType).Property(p.Name)))
-                {
-                    pb.ValueGeneratedNever();
-                }
+                pb.ValueGeneratedNever();
             }
 
             base.OnModelCreating(modelBuilder);

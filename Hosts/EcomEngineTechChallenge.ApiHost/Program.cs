@@ -1,4 +1,5 @@
 using System;
+using Eml.Mef;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -23,7 +24,7 @@ namespace EcomEngineTechChallenge.ApiHost
             }
             finally
             {
-                Startup.ClassFactory.Dispose();
+                ClassFactory.Dispose(Startup.ClassFactory);
                 NLog.LogManager.Shutdown();
             }
         }

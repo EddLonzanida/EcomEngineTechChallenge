@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EcomEngineTechChallenge.ApiHost.Controllers
 {
     [Export]
-    public class EmailTemplateController : CrudControllerBase<Guid, EmailTemplate>
+    public class EmailTemplateController : CrudControllerApiBase<Guid, EmailTemplate>
     {
         [ImportingConstructor]
         public EmailTemplateController(IDataRepositoryGuid<EmailTemplate> repository)
@@ -21,15 +21,19 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
         }
 
         [HttpGet]
-        public override async Task<IActionResult> GetItems(string search = "", int? page = 1, bool? desc = false, int? field = 0)
+        public override async Task<IActionResult> Index(int? page = 1, bool? desc = false, int? sortColumn = 0, string search = "")
         {
-            return await DoGetItemsAsync(search, page.Value, desc.Value, field.Value);
+            var pageValue = page ?? 1;
+            var descValue = desc ?? false;
+            var sortColumnValue = sortColumn ?? 0;
+
+            return await DoIndexAsync(pageValue, descValue, sortColumnValue, search);
         }
 
         [HttpGet("{id}")]
-        public override async Task<IActionResult> Get([FromRoute]Guid id)
+        public override async Task<IActionResult> Details([FromRoute]Guid id)
         {
-            return await DoGetAsync(id);
+            return await DoDetailsAsync(id);
         }
 
         [HttpGet("Suggestions")]
@@ -56,7 +60,7 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
             return await DoDeleteAsync(id, reason);
         }
 
-        protected override async Task<SearchResponse<EmailTemplate>> GetItemsAsync(string search, int page, bool desc, int sortColumn)
+        protected override async Task<SearchResponse<EmailTemplate>> GetItemsAsync(int page, bool desc, int sortColumn, string search)
         {
             search = search.ToLower();
             Expression<Func<EmailTemplate, bool>> whereClause = r => search == "" || r.SearchableName.ToLower().Contains(search);
