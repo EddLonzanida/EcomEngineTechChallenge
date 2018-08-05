@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCoreRateLimit" Version="2.1.0" />
-    <PackageReference Include="Eml.ControllerBase" Version="2.1.0.34" />
+    <PackageReference Include="Eml.ControllerBase" Version="2.1.0.37" />
     <!--<PackageReference Include="Eml.ExplicitDispose.Api" Version="2.0.0.1" />-->
     <PackageReference Include="Eml.MefDependencyResolver.Api" Version="2.1.0.12" />
     <PackageReference Include="IdentityServer4" Version="2.2.0" />

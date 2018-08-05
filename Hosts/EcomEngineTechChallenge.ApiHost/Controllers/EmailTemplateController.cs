@@ -3,8 +3,10 @@ using System.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using EcomEngineTechChallenge.Business.Common.Dto;
 using EcomEngineTechChallenge.Business.Common.Entities;
 using EcomEngineTechChallenge.Contracts;
+using Eml.Contracts.Controllers;
 using Eml.ControllerBase;
 using Eml.DataRepository.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EcomEngineTechChallenge.ApiHost.Controllers
 {
     [Export]
-    public class EmailTemplateController : CrudControllerApiBase<Guid, EmailTemplate>
+    public class EmailTemplateController : CrudControllerApiBase<Guid, EmailTemplate, EmailIndexRequest>
     {
         [ImportingConstructor]
         public EmailTemplateController(IDataRepositoryGuid<EmailTemplate> repository)
@@ -21,13 +23,13 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
         }
 
         [HttpGet]
+        [Produces(typeof(SearchResponse<EmailTemplate>))]
         public override async Task<IActionResult> Index(int? page = 1, bool? desc = false, int? sortColumn = 0, string search = "")
         {
-            var pageValue = page ?? 1;
-            var descValue = desc ?? false;
-            var sortColumnValue = sortColumn ?? 0;
+            var request = new EmailIndexRequest(page, desc, sortColumn, search);
+            var response = await DoIndexAsync(request);
 
-            return await DoIndexAsync(pageValue, descValue, sortColumnValue, search);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -60,11 +62,13 @@ namespace EcomEngineTechChallenge.ApiHost.Controllers
             return await DoDeleteAsync(id, reason);
         }
 
-        protected override async Task<SearchResponse<EmailTemplate>> GetItemsAsync(int page, bool desc, int sortColumn, string search)
+        protected override async Task<ISearchResponse<EmailTemplate>> GetItemsAsync(EmailIndexRequest request)
         {
-            search = search.ToLower();
+            var search = request.Search.ToLower();
+            var sortColumn = request.SortColumn;
+            var desc = request.IsDescending;
+            var page = request.Page;
             Expression<Func<EmailTemplate, bool>> whereClause = r => search == "" || r.SearchableName.ToLower().Contains(search);
-
             var orderBy = GetOrderBy((eSortColumn)sortColumn, desc);
             var items = await repository.GetPagedListAsync(page, whereClause, orderBy);
 
