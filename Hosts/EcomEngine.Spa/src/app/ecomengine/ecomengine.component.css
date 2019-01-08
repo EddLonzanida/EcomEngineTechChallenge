@@ -1,0 +1,25 @@
+.home-header {
+    text-align: center;
+}
+
+.home-header-image {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+}
+.error-message {
+    color: #fc2929 !important;
+}
+
+.error-message-container {
+    text-align: center !important;
+    font-family: "Roboto";
+    color: #4E4444;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.center {
+    text-align: center !important;
+}
+

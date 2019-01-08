@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="SqlServerMigrationss\**" />
+    <Compile Remove="SqlServerMigrations\**" />
+    <EmbeddedResource Remove="SqlServerMigrationss\**" />
+    <EmbeddedResource Remove="SqlServerMigrations\**" />
+    <None Remove="SqlServerMigrationss\**" />
+    <None Remove="SqlServerMigrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="SqlServerMigrations\20190108162947_InitialCreate.cs" />
+    <Compile Include="SqlServerMigrations\20190108162947_InitialCreate.Designer.cs" />
+    <Compile Include="SqlServerMigrations\20190108163031_SeedEmailTemplates.cs" />
+    <Compile Include="SqlServerMigrations\20190108163031_SeedEmailTemplates.Designer.cs" />
+    <Compile Include="SqlServerMigrations\EcomEngineDbModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\EcomEngine.Contracts\EcomEngine.Contracts.csproj" />
+    <ProjectReference Include="..\EcomEngine.Data\EcomEngine.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleDataSources\Data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>latest</LangVersion>
+	  <NoWarn>1701;1702;1705;CS1591</NoWarn>
+	  <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EcomEngine.DataMigration.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
