@@ -102,7 +102,7 @@ export class EcomengineComponent implements OnInit {
 
         if (event.sortField) {
 
-            this.searchRequest.field = this.cols.findIndex(c => event.sortField === c.field);
+            this.searchRequest.sortColumn = this.cols.findIndex(c => event.sortField === c.field);
             this.searchRequest.desc = !(event.sortOrder === -1);
 
         }

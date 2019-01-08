@@ -29,13 +29,13 @@ export class EcomengineService {
    
     private cleanParameters(request: EmailtemplateSearchRequest): EmailtemplateSearchRequest {
 
-        const cleanedRequest = new EmailtemplateSearchRequest(request.search, request.page, request.desc, request.field);
+        const cleanedRequest = new EmailtemplateSearchRequest(request.search, request.page, request.desc, request.sortColumn);
 
         if (cleanedRequest.search === "") { cleanedRequest.search = undefined; }
         if (cleanedRequest.page > 1) { } else { cleanedRequest.page = undefined; }
         if (!cleanedRequest.desc) { cleanedRequest.desc = undefined; }
         if (cleanedRequest.desc) { cleanedRequest.desc = true } else { cleanedRequest.desc = undefined; }
-        if (cleanedRequest.field > 0) { } else { cleanedRequest.field = undefined; }
+        if (cleanedRequest.sortColumn > 0) { } else { cleanedRequest.sortColumn = undefined; }
 
         return cleanedRequest;
     }

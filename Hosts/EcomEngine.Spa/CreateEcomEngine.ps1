@@ -110,7 +110,7 @@ function CreateEmailtemplateSearchRequest($path) {
     constructor(public search = "",
         public page = 0,
         public desc = false,
-        public field = 0) { }
+        public sortColumn = 0) { }
 }'
 
     $code | Set-Content $fn
@@ -165,13 +165,13 @@ export class EcomengineService {
    
     private cleanParameters(request: EmailtemplateSearchRequest): EmailtemplateSearchRequest {
 
-        const cleanedRequest = new EmailtemplateSearchRequest(request.search, request.page, request.desc, request.field);
+        const cleanedRequest = new EmailtemplateSearchRequest(request.search, request.page, request.desc, request.sortColumn);
 
         if (cleanedRequest.search === "") { cleanedRequest.search = undefined; }
         if (cleanedRequest.page > 1) { } else { cleanedRequest.page = undefined; }
         if (!cleanedRequest.desc) { cleanedRequest.desc = undefined; }
         if (cleanedRequest.desc) { cleanedRequest.desc = true } else { cleanedRequest.desc = undefined; }
-        if (cleanedRequest.field > 0) { } else { cleanedRequest.field = undefined; }
+        if (cleanedRequest.sortColumn > 0) { } else { cleanedRequest.field = undefined; }
 
         return cleanedRequest;
     }
@@ -269,9 +269,9 @@ function CreateEcomEngineComponentHtml($dest) {
                      selectionMode="single" alwaysShowPaginator="false">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
-                        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.sortColumn">
                             {{col.header}}
-                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                            <p-sortIcon [field]="col.sortColumn"></p-sortIcon>
                         </th>
                     </tr>
                 </ng-template>
@@ -281,8 +281,8 @@ function CreateEcomEngineComponentHtml($dest) {
                             <div *ngIf="col.field == ' + $singleQoute + 'dateUpdated' + $singleQoute + '">
                                 {{rowData[col.field] | date: ' + $singleQoute + 'medium' + $singleQoute + '}}
                             </div>
-                            <div *ngIf="col.field != ' + $singleQoute + 'dateUpdated' + $singleQoute + '">
-                                {{rowData[col.field]}}
+                            <div *ngIf="col.sortColumn != ' + $singleQoute + 'dateUpdated' + $singleQoute + '">
+                                {{rowData[col.sortColumn]}}
                             </div>
                         </td>
                     </tr>
@@ -409,7 +409,7 @@ export class EcomengineComponent implements OnInit {
 
         if (event.sortField) {
 
-            this.searchRequest.field = this.cols.findIndex(c => event.sortField === c.field);
+            this.searchRequest.sortColumn = this.cols.findIndex(c => event.sortField === c.sortColumn);
             this.searchRequest.desc = !(event.sortOrder === -1);
 
         }

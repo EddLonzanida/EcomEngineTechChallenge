@@ -27,8 +27,8 @@
                             "node_modules/font-awesome/css/font-awesome.css",
                             "node_modules/animate.css/animate.css",
                             "node_modules/primeicons/primeicons.css",
-                            "node_modules/primeng/resources/primeng.css",
                             "node_modules/primeng/resources/themes/bootstrap/theme.css",
+                            "node_modules/primeng/resources/primeng.css",
                             "src/styles.css"
                         ],
                         "scripts": [
