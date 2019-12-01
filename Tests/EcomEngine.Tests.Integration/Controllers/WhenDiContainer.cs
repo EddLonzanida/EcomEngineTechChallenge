@@ -1,8 +1,8 @@
 using Eml.Extensions;
 using EcomEngine.Tests.Integration.BaseClasses;
-using EcomEngine.Tests.Integration.ClassData;
 using System;
 using System.Composition;
+using EcomEngine.Tests.Utils.ClassData.Conventions;
 using Shouldly;
 using Xunit;
 

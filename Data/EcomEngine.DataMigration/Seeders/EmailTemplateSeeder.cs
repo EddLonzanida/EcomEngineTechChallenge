@@ -1,9 +1,9 @@
-﻿using System;
+﻿using EcomEngine.Business.Common.Dto.EcomEngineDb;
+using EcomEngine.Business.Common.Entities.EcomEngineDb;
+using Eml.DataRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EcomEngine.Business.Common.Dto;
-using EcomEngine.Business.Common.Entities;
-using Eml.DataRepository;
 
 namespace EcomEngine.DataMigration.Seeders
 {

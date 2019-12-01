@@ -1,28 +1,27 @@
 ﻿using EcomEngine.Api.Controllers;
-using EcomEngine.Business.Common.Entities;
-using EcomEngine.Data.Contracts;
+using EcomEngine.Business.Common.Entities.EcomEngineDb;
+using EcomEngine.Data.Repositories.EcomEngineDb.Contracts;
 using EcomEngine.Tests.Unit.BaseClasses;
-using Microsoft.AspNetCore.Mvc;
+using EcomEngine.Tests.Utils.Extensions;
 using NSubstitute;
 using Shouldly;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using X.PagedList;
 using Xunit;
 
-namespace EcomEngineTechChallenge.Tests.Unit.Controllers
+namespace EcomEngine.Tests.Unit.Controllers
 {
-    public class EmailTemplateControllerTests : ControllerTestBase<EmailTemplateController, EmailTemplate>
+    public class EmailTemplateControllerTests : ControllerTestBase<EmailTemplateController>
     {
-        private readonly IDataRepositorySoftDeleteGuid<EmailTemplate> repository;
+        private readonly IEcomEngineDataRepositorySoftDeleteGuid<EmailTemplate> repository;
 
         public EmailTemplateControllerTests()
         {
-            repository = Substitute.For<IDataRepositorySoftDeleteGuid<EmailTemplate>>();
-            controller = new EmailTemplateController(mediator, repository);
+            repository = Substitute.For<IEcomEngineDataRepositorySoftDeleteGuid<EmailTemplate>>();
+            controller = new EmailTemplateController(repository);
         }
 
         [Fact]
@@ -34,14 +33,14 @@ namespace EcomEngineTechChallenge.Tests.Unit.Controllers
                     Arg.Any<Func<IQueryable<EmailTemplate>, IOrderedQueryable<EmailTemplate>>>())
                 .Returns(pagedList);
 
-            var response = await controller.Index() as OkObjectResult; ;
+            var response = await controller.Index(null); ;
 
             await repository.Received()
                 .GetPagedListAsync(Arg.Any<int>(),
                     Arg.Any<Expression<Func<EmailTemplate, bool>>>(),
                     Arg.Any<Func<IQueryable<EmailTemplate>, IOrderedQueryable<EmailTemplate>>>());
-            var result = response?.Value as IEnumerable<EmailTemplate>;
-            result?.ToList().Count.ShouldBe(10);
+            var result = response.GetValue();
+            result.Items.Count.ShouldBe(10);
         }
     }
 }

@@ -1,8 +1,6 @@
-using EcomEngine.Business.Common.Entities;
+using EcomEngine.Business.Common.Entities.EcomEngineDb;
 using EcomEngine.DataMigration.Seeders;
 using EcomEngine.Tests.Unit.Stubs;
-using Eml.Mediator.Contracts;
-using NSubstitute;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -15,16 +13,19 @@ namespace EcomEngine.Tests.Unit.BaseClasses
 
         private const string SAMPLE_DATA_SOURCES = @"SampleDataSources";
 
-        public static List<EmailTemplate> EmailTemplatesStub { get; private set; }
+        public static RepositoryStubs RepositoryStub { get; private set; }
 
+        public static List<EmailTemplate> EmailTemplatesStub { get; private set; }
 
         public ControllerTestBaseFixture()
         {
             EmailTemplatesStub = EmailTemplateSeeder.GetEmailTemplatesFromJson(SAMPLE_DATA_SOURCES);
+            RepositoryStub = new RepositoryStubs();
         }
 
         public void Dispose()
         {
+            RepositoryStub?.Dispose();
         }
     }
 
@@ -36,6 +37,3 @@ namespace EcomEngine.Tests.Unit.BaseClasses
         // ICollectionFixture<> interfaces.
     }
 }
-
-
-

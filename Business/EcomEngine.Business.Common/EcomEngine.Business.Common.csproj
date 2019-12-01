@@ -1,20 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\EcomEngine.Contracts\EcomEngine.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Eml.DataRepository" Version="2.2.0.6" />
-    <PackageReference Include="Eml.Mediator" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	  <LangVersion>latest</LangVersion>
 	  <NoWarn>1701;1702;1705;CS1591</NoWarn>
 	  <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EcomEngine.Business.Common.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eml.Mediator" Version="2.2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\EcomEngine.Infrastructure\EcomEngine.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
