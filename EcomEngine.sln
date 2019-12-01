@@ -5,33 +5,39 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{B0D05096-CB08-49B6-9F75-9E4A4B4E0407}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Api", "Hosts\EcomEngine.Api\EcomEngine.Api.csproj", "{2C58FEE5-6A2B-4C09-82C9-D342AE9F3C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Api", "Hosts\EcomEngine.Api\EcomEngine.Api.csproj", "{2C58FEE5-6A2B-4C09-82C9-D342AE9F3C58}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CDAF8ECF-3CC8-41B8-86AC-52BDA1161288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Infrastructure", "Infrastructure\EcomEngine.Infrastructure\EcomEngine.Infrastructure.csproj", "{341918B4-2117-485A-935B-E76DB7565230}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Infrastructure", "Infrastructure\EcomEngine.Infrastructure\EcomEngine.Infrastructure.csproj", "{341918B4-2117-485A-935B-E76DB7565230}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{24025AF8-369A-43C6-8E4A-F71173820FB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Business.Common", "Business\EcomEngine.Business.Common\EcomEngine.Business.Common.csproj", "{BED27A5D-A9E7-4EC9-BAE0-D7E2F0FF8A48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Business.Common", "Business\EcomEngine.Business.Common\EcomEngine.Business.Common.csproj", "{BED27A5D-A9E7-4EC9-BAE0-D7E2F0FF8A48}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9B3EBF35-08EC-4542-93F6-558B358F9A8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Data", "Data\EcomEngine.Data\EcomEngine.Data.csproj", "{BB3439D3-7502-458F-89F3-E9EA33A6FCCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Data", "Data\EcomEngine.Data\EcomEngine.Data.csproj", "{BB3439D3-7502-458F-89F3-E9EA33A6FCCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.DataMigration", "Data\EcomEngine.DataMigration\EcomEngine.DataMigration.csproj", "{0E25482B-6D4A-4130-A745-5EF0DE9F08EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.DataMigration", "Data\EcomEngine.DataMigration\EcomEngine.DataMigration.csproj", "{0E25482B-6D4A-4130-A745-5EF0DE9F08EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Business", "Business\EcomEngine.Business\EcomEngine.Business.csproj", "{A53A11DF-64FC-45CD-A6F5-9EF3E8489F87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Business", "Business\EcomEngine.Business\EcomEngine.Business.csproj", "{A53A11DF-64FC-45CD-A6F5-9EF3E8489F87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EC8BCB4D-F6CC-47D0-8A18-C1CFFAC673D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Tests.Utils", "Tests\EcomEngine.Tests.Utils\EcomEngine.Tests.Utils.csproj", "{3BC858A0-CBF8-4A0D-8369-64715040EB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Tests.Utils", "Tests\EcomEngine.Tests.Utils\EcomEngine.Tests.Utils.csproj", "{3BC858A0-CBF8-4A0D-8369-64715040EB13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Tests.Integration", "Tests\EcomEngine.Tests.Integration\EcomEngine.Tests.Integration.csproj", "{6C2215D9-D3C4-4359-897C-2BC49719CE3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Tests.Integration", "Tests\EcomEngine.Tests.Integration\EcomEngine.Tests.Integration.csproj", "{6C2215D9-D3C4-4359-897C-2BC49719CE3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Tests.Unit", "Tests\EcomEngine.Tests.Unit\EcomEngine.Tests.Unit.csproj", "{422D6C2F-4D70-4B39-9FDD-8EF8CCE9C5CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Tests.Unit", "Tests\EcomEngine.Tests.Unit\EcomEngine.Tests.Unit.csproj", "{422D6C2F-4D70-4B39-9FDD-8EF8CCE9C5CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcomEngine.Spa", "Hosts\EcomEngine.Spa\EcomEngine.Spa.csproj", "{131C94B1-D6EF-4C5F-A5C1-F1DFB4DB0F81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcomEngine.Spa", "Hosts\EcomEngine.Spa\EcomEngine.Spa.csproj", "{131C94B1-D6EF-4C5F-A5C1-F1DFB4DB0F81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F6AF262C-875C-4648-BE84-F0290C1A9A32}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +47,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2C58FEE5-6A2B-4C09-82C9-D342AE9F3C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -167,6 +170,9 @@ Global
 		{131C94B1-D6EF-4C5F-A5C1-F1DFB4DB0F81}.Release|x86.ActiveCfg = Release|Any CPU
 		{131C94B1-D6EF-4C5F-A5C1-F1DFB4DB0F81}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2C58FEE5-6A2B-4C09-82C9-D342AE9F3C58} = {B0D05096-CB08-49B6-9F75-9E4A4B4E0407}
 		{341918B4-2117-485A-935B-E76DB7565230} = {CDAF8ECF-3CC8-41B8-86AC-52BDA1161288}
@@ -178,5 +184,8 @@ Global
 		{6C2215D9-D3C4-4359-897C-2BC49719CE3A} = {EC8BCB4D-F6CC-47D0-8A18-C1CFFAC673D3}
 		{422D6C2F-4D70-4B39-9FDD-8EF8CCE9C5CA} = {EC8BCB4D-F6CC-47D0-8A18-C1CFFAC673D3}
 		{131C94B1-D6EF-4C5F-A5C1-F1DFB4DB0F81} = {B0D05096-CB08-49B6-9F75-9E4A4B4E0407}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAAF3A1E-4920-422B-83DD-D5B497FFF1F3}
 	EndGlobalSection
 EndGlobal

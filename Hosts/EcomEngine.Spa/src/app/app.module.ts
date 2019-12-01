@@ -5,11 +5,19 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
-import { MenuModule } from "primeng/menu";
+// import { MenuModule } from "primeng/menu";
 import { TableModule } from "primeng/table";
-import { AutoCompleteModule } from "primeng/autocomplete";
-import { ButtonModule } from "primeng/button";
-import { SharedModule } from "primeng/shared";
+// import { AutoCompleteModule } from "primeng/autocomplete";
+// import { ButtonModule } from "primeng/button";
+// import { SharedModule } from "primeng/shared";
+
+import {
+    MenuModule,
+    ButtonModule,
+    AutoCompleteModule,
+    SharedModule
+  } from 'primeng/primeng';
+
 
 import { SearchService } from "./shared/services/search.service";
 import { BusyIndicatorComponent } from "./shared/busy-indicator/busy-indicator.component";
