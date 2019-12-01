@@ -1,15 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { EcomengineService } from "./services/ecomengine.service";
 import { EmailtemplateSearchRequest } from "./requests/emailtemplate-search-request";
 import { IEmailTemplate } from "./dto/iemail-template";
 import { SearchResponse } from "../shared/responses/search-response";
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: "at-ecomengine",
     templateUrl: "./ecomengine.component.html",
     styleUrls: ["./ecomengine.component.css"]
 })
-export class EcomengineComponent implements OnInit {
+export class EcomengineComponent implements OnInit, OnDestroy {
+    
+    private subcriptions: Subscription = new Subscription();
+    
     // search parameters
     searchName: string;
     // auto complete
@@ -44,7 +48,7 @@ export class EcomengineComponent implements OnInit {
         this.isBusy = true;
         this.hasErrors = false;
 
-        return this.ecomengineService.search(this.searchRequest)
+        this.subcriptions.add(this.ecomengineService.search(this.searchRequest)
             .subscribe(r => {
                 this.searchResponse = r;
                 this.canShowPager = this.searchResponse.recordCount > this.searchResponse.rowsPerPage;
@@ -57,7 +61,7 @@ export class EcomengineComponent implements OnInit {
 
                 if (initial_load) this.cd.detectChanges(); //prevent ExpressionChangedAfterItHasBeenCheckedError
 
-            }, error => this.handleError());
+            }, error => this.handleError()));
     }
 
     private handleError() {
@@ -73,10 +77,10 @@ export class EcomengineComponent implements OnInit {
 
         const query = event.query;
 
-        this.ecomengineService.getSuggestions(query)
+        this.subcriptions.add(this.ecomengineService.getSuggestions(query)
             .subscribe(suggestions => {
                 this.searchSuggestions = suggestions;
-            });
+            }));
     }
 
     onSearchClicked() {
@@ -102,11 +106,15 @@ export class EcomengineComponent implements OnInit {
 
         if (event.sortField) {
 
-            this.searchRequest.sortColumn = this.cols.findIndex(c => event.sortField === c.field);
-            this.searchRequest.desc = !(event.sortOrder === -1);
+            this.searchRequest.sortColumn = event.sortField;
+            this.searchRequest.isDescending = !(event.sortOrder === -1);
 
         }
 
         this.search();
+    }
+
+    ngOnDestroy(): void {
+        this.subcriptions.unsubscribe();
     }
 }

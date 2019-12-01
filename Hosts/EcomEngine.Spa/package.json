@@ -4,7 +4,7 @@
     "scripts": {
         "404": "copy dist\\index.html dist\\404.html",
         "ng": "ng",
-        "start": "ng serve --port 2764 -o",
+        "start": "ng serve --port 4200",
         "build": "ng build --prod",
         "lint": "ng lint"
     },
