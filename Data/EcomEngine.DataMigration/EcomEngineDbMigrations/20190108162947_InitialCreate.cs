@@ -1,5 +1,5 @@
 ﻿using System;
-using EcomEngine.DataMigration.EcomEngineDbMigrations.Sql;
+using EcomEngine.DataMigration.EcomEngineDbMigrations.Scripts;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EcomEngine.DataMigration.EcomEngineDbMigrations
@@ -47,7 +47,7 @@ namespace EcomEngine.DataMigration.EcomEngineDbMigrations
                 column: "EmailTemplateId");
 
             //NLog
-            migrationBuilder.Sql(NLogSql.GetCreateLogTable(3));
+            migrationBuilder.Sql(NLogSql.GetCreateLogTable());
             migrationBuilder.Sql(NLogSql.GetInsertLogSp());
         }
 

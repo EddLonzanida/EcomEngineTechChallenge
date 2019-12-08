@@ -1,11 +1,14 @@
+using EcomEngine.Infrastructure;
 using Eml.ConfigParser.Helpers;
+using Eml.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NLog.Common;
 using NLog.Extensions.Logging;
 using System;
-using EcomEngine.Infrastructure;
+using System.IO;
 
 namespace EcomEngine.Api
 {
@@ -13,6 +16,12 @@ namespace EcomEngine.Api
     {
         public static void Main(string[] args)
         {
+            var today = DateTime.Today.ToString("yyyy-MM-dd");
+            var binDirectory = TypeExtensions.GetBinDirectory<Program>();
+            var nLogInternalFullPath = Path.Combine(binDirectory, "NLog", $"{today}-internal.log");
+
+            InternalLogger.LogFile = nLogInternalFullPath;
+
             var logger = NLog.LogManager.LoadConfiguration("NLog.config").GetCurrentClassLogger();
 
             try
@@ -21,9 +30,9 @@ namespace EcomEngine.Api
 
                 Constants.CurrentEnvironment = webHostBuilder.GetSetting("environment");
 
-				var loggerConnectionString = GetLoggerConnectionString(Constants.CurrentEnvironment);
+                var loggerConnectionString = GetLoggerConnectionString(Constants.CurrentEnvironment);
 
-                //Key should match Nlog.config key: connectionString = "${gdc:item=EcomEngineConnectionString}"
+                //Key should match NLog.config key: connectionString = "${gdc:item=EcomEngineConnectionString}"
                 NLog.GlobalDiagnosticsContext.Set(ConnectionStrings.EcomEngineDbKey, loggerConnectionString);
 
                 webHostBuilder
@@ -54,10 +63,10 @@ namespace EcomEngine.Api
 
         private static string GetLoggerConnectionString(string currentEnvironment)
         {
-           var configuration = ConfigBuilder.GetConfiguration(currentEnvironment)
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables()
-                .Build();
+            var configuration = ConfigBuilder.GetConfiguration(currentEnvironment)
+                 .AddJsonFile("appsettings.json")
+                 .AddEnvironmentVariables()
+                 .Build();
 
             ConnectionStrings.SetOneTime(configuration);
             ApplicationSettings.SetOneTime(configuration);
