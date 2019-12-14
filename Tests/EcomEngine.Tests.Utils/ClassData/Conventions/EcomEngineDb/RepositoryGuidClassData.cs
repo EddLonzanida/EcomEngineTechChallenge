@@ -19,7 +19,8 @@ namespace EcomEngine.Tests.Utils.ClassData.Conventions.EcomEngineDb
                 var dataRepositoryGuid = typeof(IEcomEngineDataRepositoryGuid<>);
 
                 return _repositories ?? (_repositories = typeof(EntityGuidBase).Assembly
-                           .GetClasses(type => typeof(IEcomEngineDbEntity).IsAssignableFrom(type) 
+                           .GetClasses(type => typeof(IEcomEngineDbEntity).IsAssignableFrom(type)
+                                               && !type.IsAbstract
                                                && !type.IsEnum
                                                && type.Namespace != null
                                                && type.Namespace.Contains("Business.Common.Entities"))
