@@ -32,11 +32,11 @@ ERROR in ../node_modules/primeng/components/table/table.d.ts:5:27 - error TS2307
 **node_modules\primeng\components\table
 2. Replace:
 ```javascript
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';**
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 ```
 3. with:
 ```javascript
-**import { OnDestroy } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 ```
 
 ### Quick View
